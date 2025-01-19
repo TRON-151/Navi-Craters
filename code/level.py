@@ -3,7 +3,7 @@ from spirites import Sprite
 from player import Player
 
 class Level:
-   def __init__(self, tmx_map):
+   def __init__(self, tmx_map,):
       self.display_surface = pygame.display.get_surface()
 
       #groups
@@ -21,6 +21,8 @@ class Level:
          if obj.name == 'ship':      
             Player((obj.x,obj.y), self.all_sprites)
 
-   def run(self):
+
+   def run(self, delta):
+      self.all_sprites.update(delta)
       self.display_surface.fill('black')
       self.all_sprites.draw(self.display_surface)
