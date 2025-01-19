@@ -1,2 +1,2 @@
-# Forge-bound
-A 2.5D platform game.
+# Navi Craters
+A 2D Moon exploration game.
