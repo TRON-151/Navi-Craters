@@ -1,4 +1,4 @@
-from settings import *
+from libraries import *
 
 class Sprite(pygame.sprite.Sprite):
    def __init__(self, position, surf, groups):
@@ -6,3 +6,4 @@ class Sprite(pygame.sprite.Sprite):
       self.image = pygame.Surface((TILE_SIZE,TILE_SIZE))
       self.image.fill('white')
       self.rect = self.image.get_frect(topleft = position)
+      self.old_rect = self.rect.copy()

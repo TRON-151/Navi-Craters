@@ -1,4 +1,4 @@
-from settings import *
+from libraries import *
 from level import Level
 
 
@@ -19,7 +19,7 @@ class Game:
    
    def run(self):
       while True:
-         delta_time = self.clock.tick() / 1000
+         delta_time = self.clock.tick(FPS) / 1000
 
 
 
