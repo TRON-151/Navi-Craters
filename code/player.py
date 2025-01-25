@@ -7,6 +7,7 @@ class Player(pygame.sprite.Sprite):
       super().__init__(groups)
 
       self.image = pygame.image.load(join('graphics','astronaut','idle','01.png')) # pixel size of ship
+      self.z = Z_axis['Terrain']
       #player rect
       self.rect = self.image.get_frect(topleft = position)
       self.hitbox_rect = self.rect.inflate(-6, -6)

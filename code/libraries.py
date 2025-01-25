@@ -7,3 +7,9 @@ TILE_SIZE = 16
 ANIMATION_SPEED = 6
 
 FPS = 60
+
+Z_axis = {
+   'BG tiles': 0,
+   'Terrain': 1,
+   'objects': 2
+}
