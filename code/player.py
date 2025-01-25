@@ -29,7 +29,7 @@ class Player(pygame.sprite.Sprite):
       #timer
       self.timers = {
          'wall_jump': Timer(500),
-         'wall_slide': Timer(250)
+         'wall_slide_block': Timer(250)
       }
 
       #testing contact rect
@@ -63,7 +63,7 @@ class Player(pygame.sprite.Sprite):
 
 
       #vertical movement
-      if not self.on_surface['floor'] and any((self.on_surface['left'], self.on_surface['right'])):# and not self.timers['wall_slide'].active:
+      if not self.on_surface['floor'] and any((self.on_surface['left'], self.on_surface['right'])) and not self.timers['wall_slide_block'].active:
          self.direction.y += 0
          self.hitbox_rect.y += self.gravity/10 * delta_time 
       else:
@@ -78,9 +78,9 @@ class Player(pygame.sprite.Sprite):
          #jump only if on floor
          if self.on_surface['floor']:
             self.direction.y = -self.jump_height
-            # self.timers['wall_slide'].activate()
+            self.timers['wall_slide_block'].activate()
          #wall jump
-         elif any((self.on_surface['left'], self.on_surface['right'])):# and not self.timers['wall_slide'].active:
+         elif any((self.on_surface['left'], self.on_surface['right'])) and not self.timers['wall_slide_block'].active:
             self.timers['wall_jump'].activate()
             self.direction.y = -self.jump_height
             if self.on_surface['left']:
@@ -120,18 +120,18 @@ class Player(pygame.sprite.Sprite):
          if sprite.rect.colliderect(self.hitbox_rect):
             if axis == 'horizontal':
                #left      | |<-----------------------
-               if self.hitbox_rect.left <= sprite.rect.right and self.old_rect.left >= sprite.old_rect.right:
+               if self.hitbox_rect.left <= sprite.rect.right and int(self.old_rect.left) >= int(sprite.old_rect.right):
                   self.hitbox_rect.left = sprite.rect.right
                #right     ----------------------->| |
-               if self.hitbox_rect.right >= sprite.rect.left and self.old_rect.right <= sprite.old_rect.left:
+               if self.hitbox_rect.right >= sprite.rect.left and (self.old_rect.right) <= int(sprite.old_rect.left):
                   self.hitbox_rect.right = sprite.rect.left
                
             else: # vertical
                #top
-               if self.hitbox_rect.bottom >= sprite.rect.top and self.old_rect.bottom <= sprite.old_rect.top:
+               if self.hitbox_rect.bottom >= sprite.rect.top and int(self.old_rect.bottom) <= int(sprite.old_rect.top):
                   self.hitbox_rect.bottom = sprite.rect.top
                #bottom
-               if self.hitbox_rect.top <= sprite.rect.bottom and self.old_rect.top >= sprite.old_rect.bottom:
+               if self.hitbox_rect.top <= sprite.rect.bottom and int(self.old_rect.top) >= int(sprite.old_rect.bottom):
                   self.hitbox_rect.top = sprite.rect.bottom
             
             self.direction.y = 0
