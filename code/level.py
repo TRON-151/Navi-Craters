@@ -16,7 +16,7 @@ class Level:
    #setting up the tmx map for each level
    def setup(self, tmx_map):
       #tiles
-      for x,y, surf in tmx_map.get_layer_by_name('ground').tiles():
+      for x,y, surf in tmx_map.get_layer_by_name('Terrain').tiles():
          Sprite((x*TILE_SIZE,y*TILE_SIZE), surf, (self.all_sprites, self.collision_sprites))
       #objects
       for obj in tmx_map.get_layer_by_name('objects'):
