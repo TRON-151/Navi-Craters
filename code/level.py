@@ -1,13 +1,14 @@
 from libraries import *
 from spirites import Sprite
 from player import Player
+from Groups import ALL_SPRITES
 
 class Level:
    def __init__(self, tmx_map,):
       self.display_surface = pygame.display.get_surface()
 
       #groups
-      self.all_sprites = pygame.sprite.Group()
+      self.all_sprites = ALL_SPRITES()
       self.collision_sprites = pygame.sprite.Group()
 
       self.setup(tmx_map)
@@ -20,10 +21,10 @@ class Level:
       #objects
       for obj in tmx_map.get_layer_by_name('objects'):
          if obj.name == 'Astro':      
-            Player((obj.x,obj.y), self.all_sprites, self.collision_sprites)
+            self.astro = Player((obj.x,obj.y), self.all_sprites, self.collision_sprites)
 
 
    def run(self, delta_time):
       self.display_surface.fill('black')
       self.all_sprites.update(delta_time)
-      self.all_sprites.draw(self.display_surface)
+      self.all_sprites.draw(self.astro.hitbox_rect.center)

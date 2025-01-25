@@ -5,7 +5,7 @@ from level import Level
 from os.path import join
 
 class Game:
-   def __init__(self):
+   def __init__(self): 
       pygame.init()
       self.display_surface = pygame.display.set_mode((WIN_WID,WIN_HI))
       pygame.display.set_caption('Navi Craters')
