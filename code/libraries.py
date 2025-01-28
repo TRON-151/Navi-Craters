@@ -10,6 +10,7 @@ FPS = 60
 
 Z_axis = {
    'BG tiles': 0,
-   'Terrain': 1,
-   'objects': 2
+   'BG tiles 2': 1,
+   'Terrain': 2,
+   'objects': 3
 }

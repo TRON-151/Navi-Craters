@@ -6,7 +6,7 @@ class Player(pygame.sprite.Sprite):
    def __init__(self, position, groups, collision_sprites):
       super().__init__(groups)
 
-      self.image = pygame.image.load(join('graphics','astronaut','idle','01.png')) # pixel size of ship
+      self.image = pygame.image.load(join('graphics','astronaut','idle','01.png')) 
       self.z = Z_axis['Terrain']
       #player rect
       self.rect = self.image.get_frect(topleft = position)
@@ -19,7 +19,7 @@ class Player(pygame.sprite.Sprite):
       self.gravity = 250
       self.jump = False
       #jump setting
-      self.jump_height = 200
+      self.jump_height = 170
 
       #collision
       self.collision_sprites = collision_sprites
