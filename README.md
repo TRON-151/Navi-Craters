@@ -11,9 +11,9 @@ Then Run the Game in terminal:
 python code/main.py
 ```
 
-##Map of this Game
-[Alt Text](./data/levels/MAP.png)
+Map of this Game
+[MAP](./data/levels/MAP.png)
 
-##External Data used
+External Data used
 Audio: Copyright free audio from Pixabay
 Astro: https://dizabanik.itch.io/pixelastronaut
