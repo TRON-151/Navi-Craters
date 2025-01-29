@@ -33,6 +33,10 @@ class Player(pygame.sprite.Sprite):
          'wall_slide_block': Timer(250)
       }
 
+      #sound effect
+      self.jump_effect = pygame.mixer.Sound(join("audio","jump.mp3"))
+      self.jump_effect.set_volume(0.3)
+
       #testing contact rect
       # self.display_surface = pygame.display.get_surface()
 
@@ -78,6 +82,7 @@ class Player(pygame.sprite.Sprite):
       if self.jump:
          #jump only if on floor
          if self.on_surface['floor']:
+            self.jump_effect.play()
             self.direction.y = -self.jump_height
             self.timers['wall_slide_block'].activate()
          #wall jump

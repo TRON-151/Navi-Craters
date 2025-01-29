@@ -1,12 +1,12 @@
 from libraries import *
-from spirites import Sprite
+from sprites import Sprite
 from timer_lib import Timer
 from player import Player
 from Groups import ALL_SPRITES
 from os.path import join
 
 class Level:
-   def __init__(self, tmx_map):#, level_frames):
+   def __init__(self, tmx_map):
       self.display_surface = pygame.display.get_surface()
 
       #groups
@@ -16,15 +16,14 @@ class Level:
       self.setup( tmx_map,)# level_frames)
 
    #lets setup a tmx map for the level
-   def setup(self, tmx_map):#, level_frames):
+   def setup(self, tmx_map):
       for layer in ['BG tiles','BG tiles 2','Terrain']:
          #tiles
          for x,y, surf in tmx_map.get_layer_by_name(layer).tiles():
             groups = [self.all_sprites]
             if layer == 'Terrain':
                groups.append(self.collision_sprites)
-            z = Z_axis['BG tiles']
-            Sprite((x*TILE_SIZE,y*TILE_SIZE), surf,groups, z)
+            Sprite((x*TILE_SIZE,y*TILE_SIZE), surf,groups)
 
 
       #objects
@@ -35,10 +34,10 @@ class Level:
             ship_surface = pygame.image.load(join('graphics', 'Ship','idle_surface','01.png')).convert_alpha()
             self.ship = Sprite((obj.x, obj.y), ship_surface, [self.all_sprites], Z_axis['objects'])
 
-
+      #my special layer
       for x,y, surf in tmx_map.get_layer_by_name('Magic layer').tiles():
             groups = [self.all_sprites]
-            Sprite((x*TILE_SIZE,y*TILE_SIZE), surf,groups, z)
+            Sprite((x*TILE_SIZE,y*TILE_SIZE), surf,groups)
 
 
       self.show_msg = False
@@ -48,7 +47,7 @@ class Level:
    def hide_message(self):
       self.show_msg = False
 
-   def display_message(self):
+   def msg_in_end(self):
     overlay = pygame.Surface((WIN_WID, WIN_HI), pygame.SRCALPHA)
     overlay.set_alpha(128)  
     overlay.fill((0, 0, 0)) 
@@ -61,7 +60,6 @@ class Level:
 
 
 
-
    def run(self, delta_time):
       self.display_surface.fill('black')
       self.all_sprites.update(delta_time)
@@ -70,10 +68,11 @@ class Level:
       # Collision detection
       if pygame.sprite.collide_rect(self.astro, self.ship):
          self.show_msg = True
+         self.ending_credits.play()
          self.msg_timer.activate()
       
-      # Show message
+      # for the msg
       if self.show_msg:
-         self.display_message()
+         self.msg_in_end()
       
       self.msg_timer.update()
