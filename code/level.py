@@ -68,7 +68,7 @@ class Level:
       # Collision detection
       if pygame.sprite.collide_rect(self.astro, self.ship):
          self.show_msg = True
-         self.ending_credits.play()
+         # self.ending_credits.play()
          self.msg_timer.activate()
       
       # for the msg
